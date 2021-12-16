@@ -3057,7 +3057,7 @@ static int igb_probe(struct pci_dev *pdev,
 	 */
 	igb_get_hw_control(adapter);
 
-	strncpy(netdev->name, "eth%d", IFNAMSIZ);
+	strncpy(netdev->name, "igb%d", IFNAMSIZ);
 	err = register_netdev(netdev);
 	if (err)
 		goto err_register;

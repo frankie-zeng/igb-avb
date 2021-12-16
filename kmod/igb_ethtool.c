@@ -3187,6 +3187,9 @@ static const struct ethtool_ops igb_ethtool_ops = {
 #ifdef HAVE_ETHTOOL_GET_PERM_ADDR
 	.get_perm_addr          = ethtool_op_get_perm_addr,
 #endif
+#ifdef HAVE_ETHTOOL_COALESCE_PARAMS_SUPPORT
+	.supported_coalesce_params = ETHTOOL_COALESCE_USECS,
+#endif
 	.get_coalesce           = igb_get_coalesce,
 	.set_coalesce           = igb_set_coalesce,
 #ifndef HAVE_RHEL6_ETHTOOL_OPS_EXT_STRUCT
