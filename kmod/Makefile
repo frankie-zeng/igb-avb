@@ -339,6 +339,9 @@ DEPVER := $(shell /sbin/depmod -V 2>/dev/null | \
 ###########################################################################
 # Build rules
 
+modules_install:
+	$(MAKE) INSTALL_MOD_STRIP=1  -C $(KSRC) M=$(PWD) modules_install;
+
 $(MANFILE).gz: $(MANFILE)
 	gzip -c $< > $@
 
