@@ -1842,23 +1842,12 @@ next_desc:
 
 static inline void rdtscpll(uint64_t *val)
 {
-	uint32_t high, low;
-
-	__asm__ __volatile__("lfence;"
-						  "rdtsc;"
-						  : "=d"(high), "=a"(low)
-						  :
-						  : "memory");
-	*val = high;
-	*val = (*val << 32) | low;
+	asm volatile("mrs %0, cntvct_el0" : "=r" (*val));
 }
 
 static inline void __sync(void)
 {
-	__asm__ __volatile__("mfence;"
-						  :
-						  :
-						  : "memory");
+	asm volatile("dmb st" : : : "memory");  
 }
 
 int igb_get_wallclock(device_t *dev, u_int64_t *curtime, u_int64_t *rdtsc)

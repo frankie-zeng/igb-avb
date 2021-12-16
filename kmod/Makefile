@@ -96,15 +96,15 @@ endif
 endif
 
 # Version file Search Path
-VSP :=  $(KOBJ)/include/generated/utsrelease.h \
-        $(KOBJ)/include/linux/utsrelease.h \
-        $(KOBJ)/include/linux/version.h \
-        $(KOBJ)/include/generated/uapi/linux/version.h \
+VSP :=  $(KOBJ)/build/include/generated/utsrelease.h \
+        $(KOBJ)/build/include/linux/utsrelease.h \
+        $(KOBJ)/build/include/linux/version.h \
+        $(KOBJ)/build/include/generated/uapi/linux/version.h \
         /boot/vmlinuz.version.h
 
 # Config file Search Path
-CSP :=  $(KSRC)/include/generated/autoconf.h \
-        $(KSRC)/include/linux/autoconf.h \
+CSP :=  $(KSRC)/build/include/generated/autoconf.h \
+        $(KSRC)/build/include/linux/autoconf.h \
         /boot/vmlinuz.autoconf.h
 
 # prune the lists down to only files that exist
@@ -191,6 +191,9 @@ endif
 # get the kernel version - we use this to find the correct install path
 KVER := $(shell $(CC) $(EXTRA_CFLAGS) -E -dM $(VERSION_FILE) | grep UTS_RELEASE | \
         awk '{ print $$3 }' | sed 's/\"//g')
+
+$(info ${KVER})
+
 
 # assume source symlink is the same as build, otherwise adjust KOBJ
 ifneq (,$(wildcard /lib/modules/$(KVER)/build))
